@@ -1,3 +1,8 @@
+//Gabriel Klass - ProducePay Exercise
+
+//Task: Produce a Cellular Automata meighborhood with speicfic growth changes
+//      depending on the value of neighbor cells
+
 import java.util.Scanner;
 
 public class index {
@@ -15,6 +20,7 @@ public class index {
           int generations = scan.nextInt();
           System.out.print("\n");
 
+          //Runs age() on the entire town generations times.
           for(int i=1; i<=generations; i++)
           {
             arr = age(arr);
@@ -26,14 +32,22 @@ public class index {
           }
       }
 
+      //Description: Ages the town one by generation bsaed upon the given ruleset
+      //Params: 2D array representing town
+      //Return: 2D array representing new generation of town
       public static int[][] age(int[][] arr)
       {
+        //creates newTown which will be returned at the end of the method
         int[][] newTown = new int[arr.length][arr[0].length];
         createTown(newTown);
 
-        //calculate neighbors
+        //Sets Adults and Neighbors at 0 to use when calculating amounts
         int adults = 0;
         int neighbors = 0;
+
+        //uses FOUR for loops. First and second are to iterate through the
+        //town, the third and fourth are to iterate through the neighbor of the
+        //cell at (a, b)
         for(int a = 0; a<arr.length; a++)
         {
           for(int b = 0; b<arr.length; b++)
@@ -42,15 +56,20 @@ public class index {
             {
               for(int d = b-1; d<b+2; d++)
               {
+                //check to see if neighbor is outside the bounds of the town
                 if(c==-1 || c==arr.length || d==-1 || d==arr[0].length)
                 {
                     continue;
                 }else{
+                  //checks to see if (c, d) is the cell at (a, b) and thus not
+                  //a neighbor of (a, b)
                   if(c==a && d==b)
                   {
                       continue;
                   }
 
+                  //if adult, adult++ and neighbor++. If not an adult, then just
+                  //neighbor++
                   if(arr[c][d] == 2)
                   {
                       adults++;
@@ -63,15 +82,18 @@ public class index {
               }
             }
 
-            //-----------------------------------
-            //EMPTY CELLS (val = 0)
+            //-----------------------------------------------------
+            //Now, We check each cell (a, b) to see how many neighbors and
+            //adults it has, and then, based on the given ruleset, defines
+            //the same cell in the newTown as either 0, 1, 2, or 3
 
+            //EMPTY CELLS (val = 0)
             if(arr[a][b]==0 && adults==2)
             {
               newTown[a][b] = 1;
             }
 
-            //newborn cells (val = 1)
+            //NEWBORN CELLS (val = 1)
             if(arr[a][b]==1 && neighbors>=5)
             {
                 newTown[a][b] = 0;
@@ -82,7 +104,7 @@ public class index {
             {
                 newTown[a][b] = 2;
             }
-            //adult cells (val = 2)
+            //ADULT CELLS (val = 2)
             if(arr[a][b]==2 && neighbors>=3)
             {
                 newTown[a][b] = 0;
@@ -94,7 +116,7 @@ public class index {
                 newTown[a][b] = 3;
             }
 
-            //senior cells (val = 3)
+            //SENIOR CELLS (val = 3)
             if(arr[a][b] == 3)
             {
               newTown[a][b] = 0;
