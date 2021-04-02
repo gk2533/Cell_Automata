@@ -7,6 +7,6 @@ How to run code:
 Notes at 5:05pm EST - I plan on first doing an attempt just with an array values
                       before then using cell objects.
 
-Notes at 6:42 EST - I have successfully set up the file to run for a 10x10 grid.
+Notes at 6:42pm EST - I have successfully set up the file to run for a 10x10 grid.
                     Now, I will create cell objects to replace the index and
                     make this object-oriented.
