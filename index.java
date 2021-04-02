@@ -6,19 +6,24 @@ public class index {
           //Creates town, prints First Generation
           int[][] arr = new int[5][5];
           createTown(arr);
-          System.out.println("\n\nYour first town: \n");
+          System.out.println("\n\n0th Generation Town: \n");
           printTown(arr);
 
           //Gets amount of generations from user
           Scanner scan = new Scanner(System.in);
           System.out.print("\nHow many Generations will the town go through?: ");
-          String generations = scan.next();
+          int generations = scan.nextInt();
           System.out.print("\n");
 
-          arr = age(arr);
+          for(int i=1; i<=generations; i++)
+          {
+            arr = age(arr);
 
-          System.out.print("New Town: \n");
-          printTown(arr);
+            System.out.print("Generation " + i + " Town: \n");
+            printTown(arr);
+
+            System.out.print("\n");
+          }
       }
 
       public static int[][] age(int[][] arr)
@@ -41,7 +46,7 @@ public class index {
                 {
                     continue;
                 }else{
-                  if(c==a || d==b)
+                  if(c==a && d==b)
                   {
                       continue;
                   }
@@ -57,6 +62,7 @@ public class index {
                 }
               }
             }
+
             //-----------------------------------
             //EMPTY CELLS (val = 0)
 
